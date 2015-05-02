@@ -20,4 +20,11 @@ Recall
 \description{
 Compute the recall score.
 }
+\examples{
+data(cars)
+logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+Recall(y_true=mtcars$vs, y_pred=pred, positive="0")
+Recall(y_true=mtcars$vs, y_pred=pred, positive="1")
+}
 

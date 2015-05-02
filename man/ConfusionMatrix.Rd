@@ -17,4 +17,10 @@ a table of Confusion Matrix
 \description{
 Compute confusion matrix to evaluate the accuracy of a classification.
 }
+\examples{
+data(cars)
+logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+ConfusionMatrix(y_true=mtcars$vs, y_pred=pred)
+}
 

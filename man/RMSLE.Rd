@@ -17,4 +17,9 @@ Root Mean Squared Logarithmic Error Loss
 \description{
 Compute the root mean squared logarithmic error regression loss.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+RMSLE(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

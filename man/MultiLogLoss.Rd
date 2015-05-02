@@ -8,7 +8,7 @@ MultiLogLoss(y_true, y_pred)
 }
 \arguments{
 \item{y_true}{Ground truth (correct) labels vector or a matrix of
-correct labels indicating by 0 and 1, same format as probabilities matrix}
+correct labels indicating by 0-1, same format as probabilities matrix}
 
 \item{y_pred}{Predicted probabilities matrix, as returned by a classifier}
 }
@@ -17,5 +17,11 @@ Multi Class Log Loss
 }
 \description{
 Compute the multi class log loss.
+}
+\examples{
+data(iris)
+svm.model <- e1071::svm(Species~., data=iris, probability=TRUE)
+pred <- predict(svm.model, iris, probability=TRUE)
+MultiLogLoss(y_true=iris$Species, y_pred=attr(pred, "probabilities"))
 }
 

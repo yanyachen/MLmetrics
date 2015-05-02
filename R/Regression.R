@@ -6,6 +6,10 @@
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Mean Square Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' MSE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 MSE <- function(y_true, y_pred){
@@ -22,6 +26,10 @@ MSE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Root Mean Square Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' RMSE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 RMSE <- function(y_true, y_pred){
@@ -38,6 +46,10 @@ RMSE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Root Mean Squared Logarithmic Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' RMSLE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 RMSLE <- function(y_true, y_pred){
@@ -54,6 +66,10 @@ RMSLE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Root Relative Squared Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' RRSE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 RRSE <- function(y_true, y_pred){
@@ -70,6 +86,10 @@ RRSE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Mean Absolute Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' MAE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 MAE <- function(y_true, y_pred){
@@ -86,6 +106,10 @@ MAE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Median Absolute Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' MedianAE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 MedianAE <- function(y_true, y_pred){
@@ -102,6 +126,10 @@ MedianAE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return Relative Absolute Error Loss
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' RAE(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 RAE <- function(y_true, y_pred){
@@ -118,6 +146,10 @@ RAE <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) target values vector
 #' @param y_pred Estimated target values vector
 #' @return R^2 score
+#' @examples
+#' data(cars)
+#' reg <- lm(log(dist)~log(speed), data=cars)
+#' R2_score(y_true=log(cars$dist), y_pred=reg$fitted.values)
 #' @export
 
 R2_score <- function(y_true, y_pred){

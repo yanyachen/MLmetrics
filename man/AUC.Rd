@@ -7,7 +7,7 @@
 AUC(y_true, y_pred)
 }
 \arguments{
-\item{y_true}{Ground truth (correct) labels vector}
+\item{y_true}{Ground truth (correct) 0-1 labels vector}
 
 \item{y_pred}{Predicted labels vector, as returned by a classifier}
 }
@@ -16,5 +16,10 @@ Area Under the Curve (AUC)
 }
 \description{
 Compute the Area Under the Curve (AUC) from prediction scores.
+}
+\examples{
+data(cars)
+logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+AUC(y_true=mtcars$vs, y_pred=logreg$fitted.values)
 }
 

@@ -6,6 +6,11 @@
 #' @param y_true Ground truth (correct) labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return Zero-One Loss
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' ZeroOneLoss(y_true=mtcars$vs, y_pred=pred)
 #' @export
 
 ZeroOneLoss <- function(y_true, y_pred){
@@ -22,6 +27,11 @@ ZeroOneLoss <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return Accuracy
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' Accuracy(y_true=mtcars$vs, y_pred=pred)
 #' @export
 
 Accuracy <- function(y_true, y_pred){
@@ -38,6 +48,11 @@ Accuracy <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return a table of Confusion Matrix
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' ConfusionMatrix(y_true=mtcars$vs, y_pred=pred)
 #' @export
 
 ConfusionMatrix <- function(y_true, y_pred){
@@ -54,10 +69,16 @@ ConfusionMatrix <- function(y_true, y_pred){
 #' @param y_true Ground truth (correct) labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return a data.frame of Confusion Matrix
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' ConfusionDF(y_true=mtcars$vs, y_pred=pred)
 #' @keywords internal
 #' @export
 
 ConfusionDF <- function(y_true, y_pred){
+  Freq <- NULL
   Confusion_DF <- transform(as.data.frame(ConfusionMatrix(y_true, y_pred)),
                             y_true=as.character(y_true),
                             y_pred=as.character(y_pred),
@@ -76,6 +97,12 @@ ConfusionDF <- function(y_true, y_pred){
 #' @param positive An optional character string for the factor level that
 #'   corresponds to a "positive" result
 #' @return Precision
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' Precision(y_true=mtcars$vs, y_pred=pred, positive="0")
+#' Precision(y_true=mtcars$vs, y_pred=pred, positive="1")
 #' @export
 
 Precision <- function(y_true, y_pred, positive=NULL){
@@ -98,6 +125,12 @@ Precision <- function(y_true, y_pred, positive=NULL){
 #' @param positive An optional character string for the factor level that
 #'   corresponds to a "positive" result
 #' @return Recall
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' Recall(y_true=mtcars$vs, y_pred=pred, positive="0")
+#' Recall(y_true=mtcars$vs, y_pred=pred, positive="1")
 #' @export
 
 Recall <- function(y_true, y_pred, positive=NULL){
@@ -120,9 +153,16 @@ Recall <- function(y_true, y_pred, positive=NULL){
 #' @param positive An optional character string for the factor level that
 #'   corresponds to a "positive" result
 #' @return F1 Score
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' F1_Score(y_true=mtcars$vs, y_pred=pred, positive="0")
+#' F1_Score(y_true=mtcars$vs, y_pred=pred, positive="1")
 #' @export
 
 F1_Score <- function(y_true, y_pred, positive=NULL){
+  Confusion_DF <- ConfusionDF(y_true, y_pred)
   if(is.null(positive)) positive <- as.character(Confusion_DF[1,1])
   Precision <- Precision(y_true, y_pred, positive)
   Recall <- Recall(y_true, y_pred, positive)
@@ -142,14 +182,21 @@ F1_Score <- function(y_true, y_pred, positive=NULL){
 #'   corresponds to a "positive" result
 #' @param beta Weight of precision in harmonic mean
 #' @return F-Beta Score
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+#' FBeta_Score(y_true=mtcars$vs, y_pred=pred, positive="0", beta=2)
+#' FBeta_Score(y_true=mtcars$vs, y_pred=pred, positive="1", beta=2)
 #' @export
 
 FBeta_Score <- function(y_true, y_pred, positive=NULL, beta=1){
+  Confusion_DF <- ConfusionDF(y_true, y_pred)
   if(is.null(positive)) positive <- as.character(Confusion_DF[1,1])
   Precision <- Precision(y_true, y_pred, positive)
   Recall <- Recall(y_true, y_pred, positive)
   Fbeta_Score <- (1+beta^2)*(Precision*Recall)/(beta^2*Precision+Recall)
-  return(FBeta_Score)
+  return(Fbeta_Score)
 }
 
 
@@ -158,9 +205,13 @@ FBeta_Score <- function(y_true, y_pred, positive=NULL, beta=1){
 #' @description
 #' Compute the log loss/cross-entropy loss.
 #'
-#' @param y_true Ground truth (correct) labels vector
+#' @param y_true Ground truth (correct) 0-1 labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return Log loss/Cross-Entropy Loss
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' LogLoss(y_true=mtcars$vs, y_pred=logreg$fitted.values)
 #' @export
 
 LogLoss <- function(y_true, y_pred){
@@ -177,13 +228,18 @@ LogLoss <- function(y_true, y_pred){
 #' Compute the multi class log loss.
 #'
 #' @param y_true Ground truth (correct) labels vector or a matrix of 
-#'   correct labels indicating by 0 and 1, same format as probabilities matrix
+#'   correct labels indicating by 0-1, same format as probabilities matrix
 #' @param y_pred Predicted probabilities matrix, as returned by a classifier
 #' @return Multi Class Log Loss
+#' @examples
+#' data(iris)
+#' svm.model <- e1071::svm(Species~., data=iris, probability=TRUE)
+#' pred <- predict(svm.model, iris, probability=TRUE)
+#' MultiLogLoss(y_true=iris$Species, y_pred=attr(pred, "probabilities"))
 #' @export
 
 MultiLogLoss <- function(y_true, y_pred){
-  if(is.vector(y_true)){
+  if(is.factor(y_true)){
     y_true_mat <- matrix(0, nrow=length(y_true), ncol=length(levels(y_true)))
     sample_levels <- as.integer(y_true)
     for(i in 1:length(y_true)) y_true_mat[i,sample_levels[i]] <- 1
@@ -202,9 +258,13 @@ MultiLogLoss <- function(y_true, y_pred){
 #' @description
 #' Compute the Area Under the Curve (AUC) from prediction scores.
 #'
-#' @param y_true Ground truth (correct) labels vector
+#' @param y_true Ground truth (correct) 0-1 labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return Area Under the Curve (AUC)
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' AUC(y_true=mtcars$vs, y_pred=logreg$fitted.values)
 #' @export
 
 AUC <- function(y_true, y_pred){
@@ -221,9 +281,13 @@ AUC <- function(y_true, y_pred){
 #' @description
 #' Compute the Gini Coefficient.
 #'
-#' @param y_true Ground truth (correct) labels vector
+#' @param y_true Ground truth (correct) 0-1 labels vector
 #' @param y_pred Predicted labels vector, as returned by a classifier
 #' @return Gini Coefficient
+#' @examples
+#' data(cars)
+#' logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+#' Gini(y_true=mtcars$vs, y_pred=logreg$fitted.values)
 #' @export
 
 Gini <- function(y_true, y_pred){

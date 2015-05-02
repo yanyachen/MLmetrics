@@ -17,5 +17,11 @@ a data.frame of Confusion Matrix
 \description{
 Compute data frame format confusion matrix for internal usage.
 }
+\examples{
+data(cars)
+logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+ConfusionDF(y_true=mtcars$vs, y_pred=pred)
+}
 \keyword{internal}
 

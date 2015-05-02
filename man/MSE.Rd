@@ -17,4 +17,9 @@ Mean Square Error Loss
 \description{
 Compute the mean squared error regression loss.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+MSE(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

@@ -17,4 +17,9 @@ Root Relative Squared Error Loss
 \description{
 Compute the root relative squared error regression loss.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+RRSE(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

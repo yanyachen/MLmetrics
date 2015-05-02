@@ -17,4 +17,9 @@ Median Absolute Error Loss
 \description{
 Compute the median absolute error regression loss.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+MedianAE(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

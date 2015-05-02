@@ -17,4 +17,10 @@ Zero-One Loss
 \description{
 Compute the zero-one classification loss.
 }
+\examples{
+data(cars)
+logreg <- glm(formula=vs~hp+wt, family=binomial(link = "logit"), mtcars)
+pred <- ifelse(logreg$fitted.values<0.5, 0, 1)
+ZeroOneLoss(y_true=mtcars$vs, y_pred=pred)
+}
 

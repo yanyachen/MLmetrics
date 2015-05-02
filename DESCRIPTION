@@ -8,9 +8,10 @@ Description: A collection of evaluation metrics, including loss, score and utili
 URL: http://github.com/yanyachen/MLmetrics
 BugReports: http://github.com/yanyachen/MLmetrics/issues
 Depends: R (>= 2.10)
+Suggests: e1071
 License: GPL-2
 LazyData: true
 NeedsCompilation: no
-Packaged: 2015-05-01 07:10:32 UTC; Administrator
+Packaged: 2015-05-02 03:36:34 UTC; Administrator
 Author: Yachen Yan [aut, cre]
 Maintainer: Yachen Yan <yanyachen21@gmail.com>

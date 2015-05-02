@@ -17,4 +17,9 @@ R^2 score
 \description{
 Compute the R-Squared (Coefficient of Determination) Regression Score.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+R2_score(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

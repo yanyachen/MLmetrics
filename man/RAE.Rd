@@ -17,4 +17,9 @@ Relative Absolute Error Loss
 \description{
 Compute the relative absolute error regression loss.
 }
+\examples{
+data(cars)
+reg <- lm(log(dist)~log(speed), data=cars)
+RAE(y_true=log(cars$dist), y_pred=reg$fitted.values)
+}
 

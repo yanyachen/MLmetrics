@@ -8,7 +8,8 @@
 #' @return Zero-One Loss
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' ZeroOneLoss(y_pred = pred, y_true = mtcars$vs)
 #' @export
@@ -29,7 +30,8 @@ ZeroOneLoss <- function(y_pred, y_true) {
 #' @return Accuracy
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' Accuracy(y_pred = pred, y_true = mtcars$vs)
 #' @export
@@ -50,7 +52,8 @@ Accuracy <- function(y_pred, y_true) {
 #' @return a table of Confusion Matrix
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' ConfusionMatrix(y_pred = pred, y_true = mtcars$vs)
 #' @export
@@ -71,7 +74,8 @@ ConfusionMatrix <- function(y_pred, y_true) {
 #' @return a data.frame of Confusion Matrix
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' ConfusionDF(y_pred = pred, y_true = mtcars$vs)
 #' @keywords internal
@@ -98,7 +102,8 @@ utils::globalVariables("Freq")
 #' @return Precision
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' Precision(y_pred = pred, y_true = mtcars$vs, positive = "0")
 #' Precision(y_pred = pred, y_true = mtcars$vs, positive = "1")
@@ -126,7 +131,8 @@ Precision <- function(y_true, y_pred, positive = NULL) {
 #' @return Recall
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' Recall(y_pred = pred, y_true = mtcars$vs, positive = "0")
 #' Recall(y_pred = pred, y_true = mtcars$vs, positive = "1")
@@ -154,7 +160,8 @@ Recall <- function(y_true, y_pred, positive = NULL) {
 #' @return Sensitivity
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' Sensitivity(y_pred = pred, y_true = mtcars$vs, positive = "0")
 #' Sensitivity(y_pred = pred, y_true = mtcars$vs, positive = "1")
@@ -182,7 +189,8 @@ Sensitivity  <- function(y_true, y_pred, positive = NULL) {
 #' @return Specificity
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' Specificity(y_pred = pred, y_true = mtcars$vs, positive = "0")
 #' Specificity(y_pred = pred, y_true = mtcars$vs, positive = "1")
@@ -210,7 +218,8 @@ Specificity  <- function(y_true, y_pred, positive = NULL) {
 #' @return F1 Score
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 #' F1_Score(y_pred = pred, y_true = mtcars$vs, positive = "0")
 #' F1_Score(y_pred = pred, y_true = mtcars$vs, positive = "1")
@@ -239,10 +248,11 @@ F1_Score <- function(y_true, y_pred, positive = NULL) {
 #' @return F-Beta Score
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
-#' FBeta_Score(y_pred = pred, y_true = mtcars$vs, positive = "0", beta=2)
-#' FBeta_Score(y_pred = pred, y_true = mtcars$vs, positive = "1", beta=2)
+#' FBeta_Score(y_pred = pred, y_true = mtcars$vs, positive = "0", beta = 2)
+#' FBeta_Score(y_pred = pred, y_true = mtcars$vs, positive = "1", beta = 2)
 #' @export
 
 FBeta_Score <- function(y_true, y_pred, positive = NULL, beta = 1) {
@@ -265,7 +275,8 @@ FBeta_Score <- function(y_true, y_pred, positive = NULL, beta = 1) {
 #' @return Log loss/Cross-Entropy Loss
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' LogLoss(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -316,7 +327,8 @@ MultiLogLoss <- function(y_pred, y_true) {
 #' @return Area Under the ROC Curve (ROC AUC)
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' AUC(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -339,7 +351,8 @@ AUC <- function(y_pred, y_true) {
 #' @return Gini Coefficient
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' Gini(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -358,7 +371,8 @@ Gini <- function(y_pred, y_true) {
 #' @return Area Under the PR Curve (PR AUC)
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' PRAUC(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -380,7 +394,8 @@ PRAUC <- function(y_pred, y_true) {
 #' @return Area Under the Lift Chart
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' LiftAUC(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -402,7 +417,8 @@ LiftAUC <- function(y_pred, y_true) {
 #' @return Area Under the Gain Chart
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' GainAUC(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 
@@ -424,7 +440,8 @@ GainAUC <- function(y_pred, y_true) {
 #' @return Kolmogorov-Smirnov statistic
 #' @examples
 #' data(cars)
-#' logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+#' logreg <- glm(formula = vs ~ hp + wt,
+#'               family = binomial(link = "logit"), data = mtcars)
 #' KS_Stat(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 #' @export
 

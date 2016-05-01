@@ -19,7 +19,8 @@ Compute the Kolmogorov-Smirnov statistic.
 }
 \examples{
 data(cars)
-logreg <- glm(formula = vs ~ hp + wt, family = binomial(link = "logit"), mtcars)
+logreg <- glm(formula = vs ~ hp + wt,
+              family = binomial(link = "logit"), data = mtcars)
 KS_Stat(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 }
 

@@ -171,6 +171,7 @@ MedianAE <- function(y_pred, y_true) {
 #' data(cars)
 #' reg <- lm(log(dist) ~ log(speed), data = cars)
 #' MedianAPE(y_pred = exp(reg$fitted.values), y_true = cars$dist)
+#' @importFrom stats median
 #' @export
 
 MedianAPE <- function(y_pred, y_true) {

@@ -4,7 +4,7 @@ Title: Machine Learning Evaluation Metrics
 Version: 1.1.0
 Authors@R: person("Yachen", "Yan", email = "yanyachen21@gmail.com", role = c("aut", "cre"))
 Description: A collection of evaluation metrics, including loss, score and
-    utility functions, that measure regression and classification performance.
+    utility functions, that measure regression, classification and ranking performance.
 URL: http://github.com/yanyachen/MLmetrics
 BugReports: http://github.com/yanyachen/MLmetrics/issues
 Depends: R (>= 2.10)
@@ -14,6 +14,6 @@ License: GPL-2
 LazyData: true
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-05-01 09:20:13 UTC; Administrator
+Packaged: 2016-05-01 10:39:24 UTC; Administrator
 Author: Yachen Yan [aut, cre]
 Maintainer: Yachen Yan <yanyachen21@gmail.com>

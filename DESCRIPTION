@@ -1,17 +1,19 @@
 Package: MLmetrics
 Type: Package
 Title: Machine Learning Evaluation Metrics
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: person("Yachen", "Yan", email = "yanyachen21@gmail.com", role = c("aut", "cre"))
-Description: A collection of evaluation metrics, including loss, score and utility functions, 
-    that measure regression and classification performance.
+Description: A collection of evaluation metrics, including loss, score and
+    utility functions, that measure regression and classification performance.
 URL: http://github.com/yanyachen/MLmetrics
 BugReports: http://github.com/yanyachen/MLmetrics/issues
 Depends: R (>= 2.10)
+Imports: stats, utils, ROCR
 Suggests: e1071
 License: GPL-2
 LazyData: true
+RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2015-05-02 03:36:34 UTC; Administrator
+Packaged: 2016-05-01 09:20:13 UTC; Administrator
 Author: Yachen Yan [aut, cre]
 Maintainer: Yachen Yan <yanyachen21@gmail.com>

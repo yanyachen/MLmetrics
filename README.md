@@ -1,8 +1,9 @@
 # MLmetrics
 
-[![Build Status](https://travis-ci.org/yanyachen/MLmetrics.svg)](https://travis-ci.org/yanyachen/MLmetrics)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MLmetrics)](http://cran.r-project.org/package=MLmetrics)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/MLmetrics)](http://cran.rstudio.com/web/packages/MLmetrics/index.html)
+[![Build Status](https://travis-ci.org/yanyachen/MLmetrics.svg)](https://travis-ci.org/yanyachen/MLmetrics)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/yanyachen/MLmetrics?branch=master&svg=true)](https://ci.appveyor.com/project/yanyachen/MLmetrics)
 
 Machine Learning Evaluation Metrics  
 

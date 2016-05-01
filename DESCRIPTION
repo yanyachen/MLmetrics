@@ -7,13 +7,14 @@ Description: A collection of evaluation metrics, including loss, score and
     utility functions, that measure regression, classification and ranking performance.
 URL: http://github.com/yanyachen/MLmetrics
 BugReports: http://github.com/yanyachen/MLmetrics/issues
-Depends: R (>= 2.10)
-Imports: stats, utils, ROCR
-Suggests: e1071
+Depends:
+    R (>= 2.10)
+Imports:
+    stats,
+    utils,
+    ROCR
+Suggests:
+    e1071
 License: GPL-2
 LazyData: true
 RoxygenNote: 5.0.1
-NeedsCompilation: no
-Packaged: 2016-05-01 10:39:24 UTC; Administrator
-Author: Yachen Yan [aut, cre]
-Maintainer: Yachen Yan <yanyachen21@gmail.com>

@@ -21,7 +21,7 @@ Median Absolute Error
 Median Absolute Percentage Error  
 Relative Absolute Error  
 R-Squared (Coefficient of Determination) Regression Score  
-Possion LogLoss  
+Poisson LogLoss  
 Normalized Gini Coefficient
 * Classification:  
 Confusion Matrix  

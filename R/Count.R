@@ -1,4 +1,4 @@
-#' @title Possion Log loss
+#' @title Poisson Log loss
 #'
 #' @description
 #' Compute the log loss/cross-entropy loss.
@@ -11,15 +11,15 @@
 #'                    counts = c(18,17,15,20,10,20,25,13,12))
 #' glm_poisson <- glm(counts ~ outcome + treatment,
 #'                    family = poisson(link = "log"), data = d_AD)
-#' Possion_LogLoss(y_pred = glm_poisson$fitted.values, y_true = d_AD$counts)
+#' Poisson_LogLoss(y_pred = glm_poisson$fitted.values, y_true = d_AD$counts)
 #' @export
 
-Possion_LogLoss <- function(y_pred, y_true) {
+Poisson_LogLoss <- function(y_pred, y_true) {
   eps <- 1e-15
   y_pred <- pmax(y_pred, eps)
-  Possion_LogLoss <- mean(log(gamma(y_true + 1)) + y_pred - log(y_pred) * y_true)
-  # Possion_LogLoss <- mean(-dpois(y_true, y_pred, log = TRUE))
-  return(Possion_LogLoss)
+  Poisson_LogLoss <- mean(log(gamma(y_true + 1)) + y_pred - log(y_pred) * y_true)
+  # Poisson_LogLoss <- mean(-dpois(y_true, y_pred, log = TRUE))
+  return(Poisson_LogLoss)
 }
 
 

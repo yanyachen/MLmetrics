@@ -1,7 +1,7 @@
 Package: MLmetrics
 Type: Package
 Title: Machine Learning Evaluation Metrics
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: person("Yachen", "Yan", email = "yanyachen21@gmail.com", role = c("aut", "cre"))
 Description: A collection of evaluation metrics, including loss, score and
     utility functions, that measure regression, classification and ranking performance.

@@ -1,7 +1,8 @@
 # MLmetrics
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MLmetrics)](http://cran.r-project.org/package=MLmetrics)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/MLmetrics)](http://cran.rstudio.com/web/packages/MLmetrics/index.html)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/MLmetrics)](http://cran.r-project.org/package=MLmetrics)
+![CRAN Downloads Total](http://cranlogs.r-pkg.org/badges/grand-total/MLmetrics?color=brightgreen)
 Linux/Mac: [![Build Status](https://travis-ci.org/yanyachen/MLmetrics.svg)](https://travis-ci.org/yanyachen/MLmetrics)
 Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/yanyachen/MLmetrics?branch=master&svg=true)](https://ci.appveyor.com/project/yanyachen/MLmetrics)
 

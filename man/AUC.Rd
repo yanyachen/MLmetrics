@@ -23,4 +23,3 @@ logreg <- glm(formula = vs ~ hp + wt,
               family = binomial(link = "logit"), data = mtcars)
 AUC(y_pred = logreg$fitted.values, y_true = mtcars$vs)
 }
-

@@ -24,4 +24,3 @@ glm_poisson <- glm(counts ~ outcome + treatment,
                    family = poisson(link = "log"), data = d_AD)
 NormalizedGini(y_pred = glm_poisson$fitted.values, y_true = d_AD$counts)
 }
-

@@ -112,8 +112,8 @@ utils::globalVariables("Freq")
 Precision <- function(y_true, y_pred, positive = NULL) {
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
-  TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-  FP <- as.integer(sum(subset(Confusion_DF, y_true!=positive & y_pred==positive)["Freq"]))
+  TP <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive),"Freq"])
+  FP <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred==positive), "Freq"]))
   Precision <- TP/(TP+FP)
   return(Precision)
 }
@@ -151,16 +151,16 @@ Precision_micro <- function(y_true, y_pred, labels = NULL) {
     
     # it may happen that a label is never predicted (missing from y_pred) but exists in y_true
     # in this case ConfusionDF will not have these lines and thus the simplified code crashes
-    # TP[i] <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-    # FP[i] <- as.integer(sum(subset(Confusion_DF, y_true!=positive & y_pred==positive)["Freq"]))
+    # TP[i] <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"])
+    # FP[i] <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred==positive), "Freq"]))
     
     # workaround:
     # i don't want to change ConfusionDF since i don't know if the current behaviour is a feature or a bug.
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"]
-    TP[i] <- if (nrow(tmp)==0) 0 else as.integer(tmp)
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"]
+    TP[i] <- if (length(tmp)==0) 0 else as.integer(tmp)
     
-    tmp <- subset(Confusion_DF, y_true!=positive & y_pred==positive)["Freq"]
-    FP[i] <- if (nrow(tmp)==0) 0 else as.integer(sum(tmp))
+    tmp <- Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred==positive), "Freq"]
+    FP[i] <- if (length(tmp)==0) 0 else as.integer(sum(tmp))
   }
   Precision_micro <- sum(TP) / (sum(TP) + sum(FP))
   return(Precision_micro)
@@ -201,10 +201,10 @@ Precision_macro <- function(y_true, y_pred, labels = NULL) {
     # Prec[i] <- Precision(y_true, y_pred, positive = labels[i])
     
     # workaround:
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"]
-    TP <- if (nrow(tmp)==0) 0 else as.integer(tmp)
-    tmp <- subset(Confusion_DF, y_true!=positive & y_pred==positive)["Freq"]
-    FP <- if (nrow(tmp)==0) 0 else as.integer(sum(tmp))
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"]
+    TP <- if (length(tmp)==0) 0 else as.integer(tmp)
+    tmp <- Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred==positive), "Freq"]
+    FP <- if (length(tmp)==0) 0 else as.integer(sum(tmp))
     
     Prec[i] <- TP/(TP+FP)
   }
@@ -236,8 +236,8 @@ Precision_macro <- function(y_true, y_pred, labels = NULL) {
 Recall <- function(y_true, y_pred, positive = NULL) {
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
-  TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-  FN <- as.integer(sum(subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]))
+  TP <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"])
+  FN <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]))
   Recall <- TP/(TP+FN)
   return(Recall)
 }
@@ -274,15 +274,15 @@ Recall_micro <- function(y_true, y_pred, labels = NULL) {
     positive <- labels[i]
     
     # short version, comment out due to bug or feature of Confusion_DF
-    # TP[i] <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-    # FP[i] <- as.integer(sum(subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]))
+    # TP[i] <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"])
+    # FP[i] <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]))
     
     # workaround:
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"]
-    TP[i] <- if (nrow(tmp)==0) 0 else as.integer(tmp)
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"]
+    TP[i] <- if (length(tmp)==0) 0 else as.integer(tmp)
 
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]
-    FN[i] <- if (nrow(tmp)==0) 0 else as.integer(sum(tmp))
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]
+    FN[i] <- if (length(tmp)==0) 0 else as.integer(sum(tmp))
   }
   Recall_micro <- sum(TP) / (sum(TP) + sum(FN))
   return(Recall_micro)
@@ -319,15 +319,15 @@ Recall_macro <- function(y_true, y_pred, labels = NULL) {
     positive <- labels[i]
     
     # short version, comment out due to bug or feature of Confusion_DF
-    # TP[i] <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-    # FP[i] <- as.integer(sum(subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]))
+    # TP[i] <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"])
+    # FP[i] <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]))
     
     # workaround:
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"]
-    TP <- if (nrow(tmp)==0) 0 else as.integer(tmp)
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"]
+    TP <- if (length(tmp)==0) 0 else as.integer(tmp)
     
-    tmp <- subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]
-    FN <- if (nrow(tmp)==0) 0 else as.integer(sum(tmp))
+    tmp <- Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]
+    FN <- if (length(tmp)==0) 0 else as.integer(sum(tmp))
     
     Rec[i] <- TP/(TP+FN)
   }
@@ -360,8 +360,8 @@ Recall_macro <- function(y_true, y_pred, labels = NULL) {
 Sensitivity  <- function(y_true, y_pred, positive = NULL) {
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
-  TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
-  FN <- as.integer(sum(subset(Confusion_DF, y_true==positive & y_pred!=positive)["Freq"]))
+  TP <- as.integer(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred==positive), "Freq"])
+  FN <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true==positive & Confusion_DF$y_pred!=positive), "Freq"]))
   Sensitivity <- TP/(TP+FN)
   return(Sensitivity)
 }
@@ -389,8 +389,8 @@ Sensitivity  <- function(y_true, y_pred, positive = NULL) {
 Specificity  <- function(y_true, y_pred, positive = NULL) {
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
-  TN <- as.integer(subset(Confusion_DF, y_true!=positive & y_pred!=positive)["Freq"])
-  FP <- as.integer(sum(subset(Confusion_DF, y_true!=positive & y_pred==positive)["Freq"]))
+  TN <- as.integer(Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred!=positive), "Freq"])
+  FP <- as.integer(sum(Confusion_DF[which(Confusion_DF$y_true!=positive & Confusion_DF$y_pred==positive), "Freq"]))
   Specificity <- TN/(TN+FP)
   return(Specificity)
 }

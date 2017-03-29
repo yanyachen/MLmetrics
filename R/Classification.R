@@ -256,7 +256,7 @@ Precision_macro_weighted <- function(y_true, y_pred, labels = NULL) {
     Prec[i] <- TP/(TP+FP)
   }
   Prec[is.na(Prec)] <- 0
-  Precision_macro_weighted <- weighted.mean(Prec, as.vector(table(truth)[labels])) # sum(Prec) / length(labels)
+  Precision_macro_weighted <- weighted.mean(Prec, as.vector(table(y_true)[labels])) # sum(Prec) / length(labels)
   return(Precision_macro_weighted)
 }
 
@@ -429,7 +429,7 @@ Recall_macro_weighted <- function(y_true, y_pred, labels = NULL) {
   }
   
   Rec[is.na(Rec)] <- 0
-  Recall_macro_weighted <- weighted.mean(Rec, as.vector(table(truth)[labels])) # sum(Rec) / length(labels)
+  Recall_macro_weighted <- weighted.mean(Rec, as.vector(table(y_true)[labels])) # sum(Rec) / length(labels)
   return(Recall_macro_weighted)
 }
 

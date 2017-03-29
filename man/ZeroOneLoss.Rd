@@ -24,4 +24,3 @@ logreg <- glm(formula = vs ~ hp + wt,
 pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 ZeroOneLoss(y_pred = pred, y_true = mtcars$vs)
 }
-

@@ -29,10 +29,16 @@ Confusion Matrix
 Zero-One Loss  
 Accuracy  
 Precision  
+Precision (micro averaged)  
+Precision (macro averaged)  
 Recall  
+Recall (micro averaged)  
+Recall (macro averaged)  
 Sensitivity  
 Specificity  
 F1 Score  
+F1 Score (micro averaged)  
+F1 Score (macro averaged)  
 F-Beta Score  
 Log loss / Cross-Entropy Loss  
 Multi Class Log Loss  

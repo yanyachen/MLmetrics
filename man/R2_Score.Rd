@@ -22,4 +22,3 @@ data(cars)
 reg <- lm(log(dist) ~ log(speed), data = cars)
 R2_Score(y_pred = exp(reg$fitted.values), y_true = cars$dist)
 }
-

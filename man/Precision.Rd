@@ -28,4 +28,3 @@ pred <- ifelse(logreg$fitted.values < 0.5, 0, 1)
 Precision(y_pred = pred, y_true = mtcars$vs, positive = "0")
 Precision(y_pred = pred, y_true = mtcars$vs, positive = "1")
 }
-

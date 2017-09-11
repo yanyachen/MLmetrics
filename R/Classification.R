@@ -15,6 +15,8 @@
 #' @export
 
 ZeroOneLoss <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   ZeroOneLoss <- mean(y_true != y_pred)
   return(ZeroOneLoss)
 }
@@ -37,6 +39,8 @@ ZeroOneLoss <- function(y_pred, y_true) {
 #' @export
 
 Accuracy <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Accuracy <- mean(y_true == y_pred)
   return(Accuracy)
 }
@@ -59,6 +63,8 @@ Accuracy <- function(y_pred, y_true) {
 #' @export
 
 ConfusionMatrix <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_Mat <- table(y_true, y_pred)
   return(Confusion_Mat)
 }
@@ -82,6 +88,8 @@ ConfusionMatrix <- function(y_pred, y_true) {
 #' @export
 
 ConfusionDF <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- transform(as.data.frame(ConfusionMatrix(y_pred, y_true)),
                             y_true = as.character(y_true),
                             y_pred = as.character(y_pred),
@@ -110,6 +118,8 @@ utils::globalVariables("Freq")
 #' @export
 
 Precision <- function(y_true, y_pred, positive = NULL) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
@@ -139,6 +149,8 @@ Precision <- function(y_true, y_pred, positive = NULL) {
 #' @export
 
 Recall <- function(y_true, y_pred, positive = NULL) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
@@ -168,6 +180,8 @@ Recall <- function(y_true, y_pred, positive = NULL) {
 #' @export
 
 Sensitivity  <- function(y_true, y_pred, positive = NULL) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   TP <- as.integer(subset(Confusion_DF, y_true==positive & y_pred==positive)["Freq"])
@@ -197,6 +211,8 @@ Sensitivity  <- function(y_true, y_pred, positive = NULL) {
 #' @export
 
 Specificity  <- function(y_true, y_pred, positive = NULL) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   TN <- as.integer(subset(Confusion_DF, y_true!=positive & y_pred!=positive)["Freq"])
@@ -226,6 +242,8 @@ Specificity  <- function(y_true, y_pred, positive = NULL) {
 #' @export
 
 F1_Score <- function(y_true, y_pred, positive = NULL) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   Precision <- Precision(y_true, y_pred, positive)
@@ -256,6 +274,8 @@ F1_Score <- function(y_true, y_pred, positive = NULL) {
 #' @export
 
 FBeta_Score <- function(y_true, y_pred, positive = NULL, beta = 1) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   Confusion_DF <- ConfusionDF(y_pred, y_true)
   if (is.null(positive) == TRUE) positive <- as.character(Confusion_DF[1,1])
   Precision <- Precision(y_true, y_pred, positive)
@@ -281,6 +301,8 @@ FBeta_Score <- function(y_true, y_pred, positive = NULL, beta = 1) {
 #' @export
 
 LogLoss <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   eps <- 1e-15
   y_pred <- pmax(pmin(y_pred, 1 - eps), eps)
   LogLoss <- -mean(y_true * log(y_pred) + (1 - y_true) * log(1 - y_pred))
@@ -306,6 +328,8 @@ LogLoss <- function(y_pred, y_true) {
 #' @export
 
 MultiLogLoss <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   if (is.matrix(y_true) == FALSE) {
     y_true <- model.matrix(~ 0 + ., data.frame(as.character(y_true)))
   }
@@ -333,6 +357,8 @@ MultiLogLoss <- function(y_pred, y_true) {
 #' @export
 
 AUC <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   rank <- rank(y_pred)
   n_pos <- as.double(sum(y_true == 1))
   n_neg <- as.double(sum(y_true == 0))
@@ -357,6 +383,8 @@ AUC <- function(y_pred, y_true) {
 #' @export
 
 Gini <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   NormalizedGini(y_pred, y_true)
 }
 
@@ -377,6 +405,10 @@ Gini <- function(y_pred, y_true) {
 #' @export
 
 PRAUC <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   pred_obj <- ROCR::prediction(y_pred, y_true)
   perf_obj <- ROCR::performance(pred_obj, measure = "prec", x.measure = "rec")
   PRAUC <- Area_Under_Curve(perf_obj@x.values[[1]], perf_obj@y.values[[1]], method = "trapezoid", na.rm = TRUE)
@@ -400,6 +432,8 @@ PRAUC <- function(y_pred, y_true) {
 #' @export
 
 LiftAUC <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   pred_obj <- ROCR::prediction(y_pred, y_true)
   perf_obj <- ROCR::performance(pred_obj, measure = "lift", x.measure = "rpp")
   LiftAUC <- Area_Under_Curve(perf_obj@x.values[[1]], perf_obj@y.values[[1]], method = "trapezoid", na.rm = TRUE)
@@ -423,6 +457,8 @@ LiftAUC <- function(y_pred, y_true) {
 #' @export
 
 GainAUC <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   pred_obj <- ROCR::prediction(y_pred, y_true)
   perf_obj <- ROCR::performance(pred_obj, measure = "tpr", x.measure = "rpp")
   GainAUC <- Area_Under_Curve(perf_obj@x.values[[1]], perf_obj@y.values[[1]], method = "trapezoid", na.rm = TRUE)
@@ -446,6 +482,8 @@ GainAUC <- function(y_pred, y_true) {
 #' @export
 
 KS_Stat <- function(y_pred, y_true) {
+  if (!is_unit_scale(y_pred) || !is_binary(y_true))
+    stop("wrong input format")
   pred_obj <- ROCR::prediction(y_pred, y_true)
   perf_obj <- ROCR::performance(pred_obj, measure = "tpr", x.measure = "fpr")
   KS_Stat <- max(perf_obj@y.values[[1]] - perf_obj@x.values[[1]])

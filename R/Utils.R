@@ -42,7 +42,10 @@ Area_Under_Curve <- function(x, y, method = c("trapezoid", "step", "spline"), na
 
 
 is_binary <- function(x) {
-  all(x %in% c(0L, 1L))
+  is.logical(x) ||
+  (is.numeric(x) && all(x %in% c(0L, 1L))) ||
+  (is.factor(x) && nlevels(x) == 2L) ||
+  (is.character(x) && length(unique(x)) == 2L)
 } 
 
 is_unit_scale <- function(x) {

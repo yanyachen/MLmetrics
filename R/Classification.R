@@ -328,8 +328,6 @@ LogLoss <- function(y_pred, y_true) {
 #' @export
 
 MultiLogLoss <- function(y_pred, y_true) {
-  if (!is_unit_scale(y_pred) || !is_binary(y_true))
-    stop("wrong input format")
   if (is.matrix(y_true) == FALSE) {
     y_true <- model.matrix(~ 0 + ., data.frame(as.character(y_true)))
   }

@@ -8,11 +8,11 @@ Description: A collection of evaluation metrics, including loss, score and
 URL: http://github.com/yanyachen/MLmetrics
 BugReports: http://github.com/yanyachen/MLmetrics/issues
 Depends: R (>= 2.10)
-Imports: stats, utils, ROCR
+Imports: ROCR
 Suggests: e1071
 License: GPL-2
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 NeedsCompilation: no
 Packaged: 2017-01-21 02:16:07 UTC; Administrator
 Author: Yachen Yan [aut, cre]

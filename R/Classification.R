@@ -405,8 +405,6 @@ Gini <- function(y_pred, y_true) {
 PRAUC <- function(y_pred, y_true) {
   if (!is_unit_scale(y_pred) || !is_binary(y_true))
     stop("wrong input format")
-  if (!is_unit_scale(y_pred) || !is_binary(y_true))
-    stop("wrong input format")
   pred_obj <- ROCR::prediction(y_pred, y_true)
   perf_obj <- ROCR::performance(pred_obj, measure = "prec", x.measure = "rec")
   PRAUC <- Area_Under_Curve(perf_obj@x.values[[1]], perf_obj@y.values[[1]], method = "trapezoid", na.rm = TRUE)

@@ -1,10 +1,8 @@
 # MLmetrics
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MLmetrics)](http://cran.r-project.org/package=MLmetrics)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/MLmetrics)](http://cran.r-project.org/package=MLmetrics)
-![CRAN Downloads Total](http://cranlogs.r-pkg.org/badges/grand-total/MLmetrics?color=brightgreen)
-Linux/Mac: [![Build Status](https://travis-ci.org/yanyachen/MLmetrics.svg)](https://travis-ci.org/yanyachen/MLmetrics)
-Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/yanyachen/MLmetrics?branch=master&svg=true)](https://ci.appveyor.com/project/yanyachen/MLmetrics)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/MLmetrics)](https://cran.r-project.org/package=MLmetrics)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/MLmetrics)](https://cran.r-project.org/package=MLmetrics)
+![CRAN Downloads Total](https://cranlogs.r-pkg.org/badges/grand-total/MLmetrics?color=brightgreen)
 
 Machine Learning Evaluation Metrics  
 
@@ -44,7 +42,7 @@ GainAUC
 Kolmogorov-Smirnov Statistic  
 
 To install:  
-* the stable version from [CRAN](http://cran.r-project.org/web/packages/MLmetrics/index.html):  
+* the stable version from [CRAN](https://cran.r-project.org/web/packages/MLmetrics/index.html):
 ```r
 install.packages("MLmetrics")
 ```
